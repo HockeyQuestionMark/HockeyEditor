@@ -25,7 +25,7 @@ namespace HockeyEditor
         /// Attaches to hockey.exe. Must be called before anything else. Make sure hockey is running
         /// </summary>
         /// <param name="launchHockey">Whether to launch the hockey process or not.</param>
-        public static void Init()
+        public static void Init(bool isServer)
         {
             try
             {
@@ -45,17 +45,11 @@ namespace HockeyEditor
         /// </summary>
         /// <param name="v">float[] representing a Vector3.  x (width) = v[0]. y (height) = v[1], z (length) = v[2]</param>
         /// <param name="address"> The address of the vector to write. Addresses are contained in HQMClientAddresses or HQMServerAddresses</param>
-        public static void WriteVector3(float[] v, int address)
-        {
-            if (v.Length < 3)
-            {
-                Console.Write("HQMEditor: Invalid write vector");
-                return;
-            }
-
+        public static void WriteHQMVector(HQMVector v, int address)
+        {         
             int bytesWritten = 0;
             var buffer = new byte[12];
-            var posArray = new float[] { v[0], v[1], v[2] };
+            var posArray = new float[] { v.X, v.Y, v.Z };
             Buffer.BlockCopy(posArray, 0, buffer, 0, buffer.Length);
 
             WriteProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesWritten);
@@ -67,16 +61,16 @@ namespace HockeyEditor
         /// </summary>
         /// <param name="address">The address of the Vector3 to write. . Addresses are contained in HQMClientAddresses or HQMServerAddresses</param>
         /// <returns>float[] representing a Vector3. x (width) = v[0]. y (height) = v[1], z (length) = v[2]</returns>
-        public static float[] ReadVector3(int address)
+        public static HQMVector ReadHQMVector(int address)
         {
             int bytesRead = 0;
             byte[] buffer = new byte[12];
 
             ReadProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesRead);
 
-            float[] v = new float[3] { System.BitConverter.ToSingle(buffer.Take(4).ToArray(), 0),
+            HQMVector v = new HQMVector ( System.BitConverter.ToSingle(buffer.Take(4).ToArray(), 0),
                                     System.BitConverter.ToSingle(buffer.Skip(4).Take(4).ToArray(), 0),
-                                    System.BitConverter.ToSingle(buffer.Skip(8).Take(4).ToArray(), 0) };
+                                    System.BitConverter.ToSingle(buffer.Skip(8).Take(4).ToArray(), 0) );
             return v;
         }
     }
