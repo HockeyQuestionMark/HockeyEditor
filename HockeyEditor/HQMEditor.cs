@@ -91,5 +91,35 @@ namespace HockeyEditor
                 return new HQMVector(X / m, Y / m, Z / m);
             }
         }
+
+        public HQMVector operator +(HQMVector left, HQMVector right)
+        {
+            return new HQMVector(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+        }
+
+        public HQMVector operator -(HQMVector left, HQMVector right)
+        {
+            return new HQMVector(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+        }
+
+        public HQMVector operator *(HQMVector vector, float scale)
+        {
+            return new HQMVector(vector.X * scale, vector.Y * scale, vector.Z * scale);
+        }
+
+        public HQMVector operator /(HQMVector vector, float scale)
+        {
+            return new HQMVector(vector.X / scale, vector.Y / scale, vector.Z / scale);
+        }
+
+        public bool operator ==(HQMVector left, HQMVector right)
+        {
+            return left.X == right.X && left.Y == right.Y && left.Z == right.Z;
+        }
+
+        public bool operator !=(HQMVector left, HQMVector right)
+        {
+            return !(left == right);
+        }
     }
 }
