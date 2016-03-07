@@ -68,9 +68,10 @@ namespace HockeyEditor
 
             ReadProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesRead);
 
-            HQMVector v = new HQMVector ( System.BitConverter.ToSingle(buffer.Take(4).ToArray(), 0),
-                                    System.BitConverter.ToSingle(buffer.Skip(4).Take(4).ToArray(), 0),
-                                    System.BitConverter.ToSingle(buffer.Skip(8).Take(4).ToArray(), 0) );
+            var posArray = new float[3];
+            Buffer.BlockCopy(buffer, 0, posArray, 0, buffer.Length);
+            HQMVector v = new HQMVector(posArray[0], posArray[1], posArray[2]);
+
             return v;
         }
     }
