@@ -48,16 +48,14 @@ namespace HockeyEditor
             //set { if (value.Length == 3) MemoryWriter.WriteVector3(value, HQMClientAddresses.PLAYER_STICK_POS); }
         }
 
-       
-
         //should probably read these in from file.
         public static class HQMAddresses
         {
-            public static int PUCK_POS          { get { if (!IsServer) return 0x07D1C290; else return 0x00000000; } }
-            public static int PUCK_VELOCITY     { get { if (!IsServer) return 0x07D1C2CC; else return 0x00000000; } }
-            public static int PUCK_ROT_VELOCITY { get { if (!IsServer) return 0x07D1C2E4; else return 0x00000000; } }
-            public static int PLAYER_POS        { get { if (!IsServer) return 0x04C25258; else return 0x00000000; } }
-            public static int PLAYER_STICK_POS  { get { if (!IsServer) return 0X07D1CEF8; else return 0x00000000; } }
+            public static int PUCK_POS          { get { return !IsServer ? 0x07D1C290 : 0x00000000; } }
+            public static int PUCK_VELOCITY     { get { return !IsServer ? 0x07D1C2CC : 0x00000000; } }
+            public static int PUCK_ROT_VELOCITY { get { return !IsServer ? 0x07D1C2E4 : 0x00000000; } }
+            public static int PLAYER_POS        { get { return !IsServer ? 0x04C25258 : 0x00000000; } }
+            public static int PLAYER_STICK_POS  { get { return !IsServer ? 0X07D1CEF8 : 0x00000000; } }
         }                                                   
     }
     
@@ -72,6 +70,56 @@ namespace HockeyEditor
             X = x;
             Y = y;
             Z = z;
+        }
+
+        /// <summary>
+        /// The length of the vector
+        /// </summary>
+        public float magnitude
+        {
+            get { return (float)Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2) + Math.Pow(Z, 2)); }
+        }
+
+        /// <summary>
+        /// The same vector with a magnitude of 1
+        /// </summary>
+        public HQMVector normalized
+        {
+            get
+            {
+                float m = magnitude;
+                return new HQMVector(X / m, Y / m, Z / m);
+            }
+        }
+
+        public static HQMVector operator +(HQMVector left, HQMVector right)
+        {
+            return new HQMVector(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+        }
+
+        public static HQMVector operator -(HQMVector left, HQMVector right)
+        {
+            return new HQMVector(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+        }
+
+        public static HQMVector operator *(HQMVector vector, float scale)
+        {
+            return new HQMVector(vector.X * scale, vector.Y * scale, vector.Z * scale);
+        }
+
+        public static HQMVector operator /(HQMVector vector, float scale)
+        {
+            return new HQMVector(vector.X / scale, vector.Y / scale, vector.Z / scale);
+        }
+
+        public static bool operator ==(HQMVector left, HQMVector right)
+        {
+            return left.X == right.X && left.Y == right.Y && left.Z == right.Z;
+        }
+
+        public static bool operator !=(HQMVector left, HQMVector right)
+        {
+            return !(left == right);
         }
     }
 }
