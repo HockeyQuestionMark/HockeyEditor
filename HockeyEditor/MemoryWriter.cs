@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
@@ -41,6 +42,73 @@ namespace HockeyEditor
         }
 
         /// <summary>
+        /// Read a 32 bit integer from memory.
+        /// </summary>
+        /// <param name="address">the address to read from</param>
+        public static int ReadInt(int address)
+        {
+            int bytesRead = 0;
+            var buffer = new byte[4];
+            ReadProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesRead);
+
+            return BitConverter.ToInt32(buffer, 0);
+        }
+
+        /// <summary>
+        /// Write a 32 bit integer to memory.
+        /// </summary>
+        /// <param name="value">the integer to write</param>
+        /// <param name="address">the address to write to</param>
+        public static void WriteInt(int value, int address)
+        {
+            int bytesWritten = 0;
+            var buffer = BitConverter.GetBytes(value);
+
+            WriteProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesWritten);
+        }
+
+        /// <summary>
+        /// Read a float from memory.
+        /// </summary>
+        /// <param name="address">the address to read from</param>
+        public static float ReadFloat(int address)
+        {
+            int bytesRead = 0;
+            var buffer = new byte[4];
+            ReadProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesRead);
+
+            return BitConverter.ToSingle(buffer, 0);
+        }
+
+        /// <summary>
+        /// Write a float to memory.
+        /// </summary>
+        /// <param name="value">the float to write</param>
+        /// <param name="address">the address to write to</param>
+        public static void WriteFloat(float value, int address)
+        {
+            int bytesWritten = 0;
+            var buffer = BitConverter.GetBytes(value);
+
+            WriteProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesWritten);
+        }
+
+        /// <summary>
+        /// Read a string from memory
+        /// </summary>
+        /// <param name="address">the address to read from</param>
+        /// <param name="length">the length of the string to read</param>
+        public static string ReadString(int address, int length)
+        {
+            int bytesRead = 0;
+            var buffer = new byte[length];
+            ReadProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesRead);
+
+            // Read up until a \0 is encounted
+            return Encoding.ASCII.GetString(buffer).Split('\0')[0];
+        }
+
+        /// <summary>
         /// Writes a Vector3 to memory.
         /// </summary>
         /// <param name="v">float[] representing a Vector3.  x (width) = v[0]. y (height) = v[1], z (length) = v[2]</param>
@@ -54,7 +122,6 @@ namespace HockeyEditor
 
             WriteProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesWritten);
         }
-
 
         /// <summary>
         /// Reads a Vector3 from memory

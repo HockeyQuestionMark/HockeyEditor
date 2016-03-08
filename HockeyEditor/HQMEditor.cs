@@ -17,46 +17,6 @@ namespace HockeyEditor
             IsServer = isServer;
             MemoryWriter.Init(isServer);
         }
-
-        public static HQMVector PuckPosition
-        {
-            get { return MemoryWriter.ReadHQMVector(HQMAddresses.PUCK_POS); }
-            set { MemoryWriter.WriteHQMVector(value, HQMAddresses.PUCK_POS); }
-        }
-
-        public static HQMVector PuckVelocity
-        {
-            get { return MemoryWriter.ReadHQMVector(HQMAddresses.PUCK_VELOCITY); }
-            set { MemoryWriter.WriteHQMVector(value, HQMAddresses.PUCK_VELOCITY); }
-        }
-
-        public static HQMVector PuckRotationalVelocity
-        {
-            get { return MemoryWriter.ReadHQMVector(HQMAddresses.PUCK_ROT_VELOCITY); }
-            set { MemoryWriter.WriteHQMVector(value, HQMAddresses.PUCK_ROT_VELOCITY); }
-        }
-
-        public static HQMVector PlayerPosition
-        {
-            get { return MemoryWriter.ReadHQMVector(HQMAddresses.PLAYER_POS); }
-            //set { if (value.Length == 3) WriteVector3(value, HQMClientAddresses.PLAYER_POS); }
-        }
-
-        public static HQMVector PlayerStickPosition
-        {
-            get { return MemoryWriter.ReadHQMVector(HQMAddresses.PLAYER_STICK_POS); }
-            //set { if (value.Length == 3) MemoryWriter.WriteVector3(value, HQMClientAddresses.PLAYER_STICK_POS); }
-        }
-
-        //should probably read these in from file.
-        public static class HQMAddresses
-        {
-            public static int PUCK_POS          { get { return !IsServer ? 0x07D1C290 : 0x00000000; } }
-            public static int PUCK_VELOCITY     { get { return !IsServer ? 0x07D1C2CC : 0x00000000; } }
-            public static int PUCK_ROT_VELOCITY { get { return !IsServer ? 0x07D1C2E4 : 0x00000000; } }
-            public static int PLAYER_POS        { get { return !IsServer ? 0x04C25258 : 0x00000000; } }
-            public static int PLAYER_STICK_POS  { get { return !IsServer ? 0X07D1CEF8 : 0x00000000; } }
-        }                                                   
     }
     
     public class HQMVector
@@ -117,9 +77,24 @@ namespace HockeyEditor
             return left.X == right.X && left.Y == right.Y && left.Z == right.Z;
         }
 
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public static bool operator !=(HQMVector left, HQMVector right)
         {
             return !(left == right);
+        }
+
+        public override string ToString()
+        {
+            return X.ToString("F2") + "," + Y.ToString("F2") + "," + Z.ToString("F2");
         }
     }
 }
