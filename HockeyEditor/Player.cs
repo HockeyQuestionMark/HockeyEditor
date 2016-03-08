@@ -42,15 +42,6 @@ namespace HockeyEditor
         const int StickPositionOffset = 0xA0;
         
         /// <summary>
-        /// Creates a new Player object using the specified name
-        /// </summary>
-        /// <param name="playerName">The name of the player to get</param>
-        public Player(string playerName)
-        {
-            // search for a player by name in PlayerList
-        }
-
-        /// <summary>
         /// Creates a new Player object using the specified server slot
         /// </summary>
         /// <param name="slot">The slot in the server list (0 based)</param>
@@ -60,9 +51,9 @@ namespace HockeyEditor
         }
 
         /// <summary>
-        /// Returns true if the player in this slot is in the server
+        /// Returns true if the player is in the server
         /// </summary>
-        public bool InServer
+        public bool inServer
         {
             get { return MemoryWriter.ReadInt(PlayerListAddress + slot * Length + InServerOffset) == 1; }
         }
@@ -70,7 +61,7 @@ namespace HockeyEditor
         /// <summary>
         /// The player's id, used to get it's location data
         /// </summary>
-        public int ID
+        public int id
         {
             get { return MemoryWriter.ReadInt(PlayerListAddress + slot * Length + IdOffset); }
         }
@@ -78,7 +69,7 @@ namespace HockeyEditor
         /// <summary>
         /// The team that the player is on
         /// </summary>
-        public HQMTeam Team
+        public HQMTeam team
         {
             get { return (HQMTeam)MemoryWriter.ReadInt(PlayerListAddress + slot * Length + TeamOffset); }
             set { MemoryWriter.WriteInt((int)value, PlayerListAddress + slot * Length + TeamOffset); }
@@ -87,16 +78,16 @@ namespace HockeyEditor
         /// <summary>
         /// The role that the player is occupying
         /// </summary>
-        public HQMRole Role
+        public HQMRole role
         {
             get { return (HQMRole)MemoryWriter.ReadInt(PlayerListAddress + slot * Length + RoleOffset); }
             set { MemoryWriter.WriteInt((int)value, PlayerListAddress + slot * Length + RoleOffset); }
         }
 
         /// <summary>
-        /// Time amount of time in milliseconds that before the player can change team again
+        /// Time amount of time in hundredths of a second that before the player can change team again
         /// </summary>
-        public int LockoutTime
+        public int lockoutTime
         {
             get { return MemoryWriter.ReadInt(PlayerListAddress + slot * Length + LockoutTimeOffset); }
         }
@@ -104,7 +95,7 @@ namespace HockeyEditor
         /// <summary>
         /// The name of the player
         /// </summary>
-        public string Name
+        public string name
         {
             get { return MemoryWriter.ReadString(PlayerListAddress + slot * Length + NameOffset, 24); }
         }
@@ -112,16 +103,16 @@ namespace HockeyEditor
         /// <summary>
         /// The angle of the player's stick. Ranges from -1 to 1 in increments of 0.25
         /// </summary>
-        public float StickAngle
+        public float stickAngle
         {
             get { return MemoryWriter.ReadFloat(PlayerListAddress + slot * Length + StickAngleOffset); }
-            set { MemoryWriter.WriteFloat(value, PlayerListAddress + slot * Length + StickAngleOffset);}
+            set { MemoryWriter.WriteFloat(value, PlayerListAddress + slot * Length + StickAngleOffset); }
         }
 
         /// <summary>
         /// The direction the player is turning. -1 = Left, 1 = Right, 0 = not turning
         /// </summary>
-        public float Turning
+        public float turning
         {
             get { return MemoryWriter.ReadFloat(PlayerListAddress + slot * Length + TurningOffset); }
             set { MemoryWriter.WriteFloat(value, PlayerListAddress + slot * Length + TurningOffset); }
@@ -130,7 +121,7 @@ namespace HockeyEditor
         /// <summary>
         /// Whether the player is moving forwards (1), reversing (-1) or not moving (0)
         /// </summary>
-        public float ForwardBack
+        public float forwardBack
         {
             get { return MemoryWriter.ReadFloat(PlayerListAddress + slot * Length + ForwardBackOffset); }
             set { MemoryWriter.WriteFloat(value, PlayerListAddress + slot * Length + ForwardBackOffset); }
@@ -139,7 +130,7 @@ namespace HockeyEditor
         /// <summary>
         /// The rotation of the stick around the player (in radians). Ranges from -Pi / 2 to Pi / 2
         /// </summary>
-        public float StickXRotation
+        public float stickXRotation
         {
             get { return MemoryWriter.ReadFloat(PlayerListAddress + slot * Length + StickXRotationOffset); }
             set { MemoryWriter.WriteFloat(value, PlayerListAddress + slot * Length + StickXRotationOffset); }
@@ -148,7 +139,7 @@ namespace HockeyEditor
         /// <summary>
         /// The rotation of the stick away from the player (in radians)
         /// </summary>
-        public float StickYRotation
+        public float stickYRotation
         {
             get { return MemoryWriter.ReadFloat(PlayerListAddress + slot * Length + StickYRotationOffset); }
             set { MemoryWriter.WriteFloat(value, PlayerListAddress + slot * Length + StickYRotationOffset); }
@@ -157,7 +148,7 @@ namespace HockeyEditor
         /// <summary>
         /// 1 = Jumping, 2 = Crouched, 16 = Stopped with Shift
         /// </summary>
-        public int LegState
+        public int legState
         {
             get { return MemoryWriter.ReadInt(PlayerListAddress + slot * Length + LegStateOffset); }
             set { MemoryWriter.WriteInt(value, PlayerListAddress + slot * Length + LegStateOffset); }
@@ -166,7 +157,7 @@ namespace HockeyEditor
         /// <summary>
         /// The rotation of the player's head looking left or right
         /// </summary>
-        public float HeadXRotation
+        public float headXRotation
         {
             get { return MemoryWriter.ReadFloat(PlayerListAddress + slot * Length + HeadXRotationOffset); }
             set { MemoryWriter.WriteFloat(value, PlayerListAddress + slot * Length + HeadXRotationOffset); }
@@ -175,7 +166,7 @@ namespace HockeyEditor
         /// <summary>
         /// The rotation of the player's head looking up or down
         /// </summary>
-        public float HeadYRotation
+        public float headYRotation
         {
             get { return MemoryWriter.ReadFloat(PlayerListAddress + slot * Length + HeadYRotationOffset); }
             set { MemoryWriter.WriteFloat(value, PlayerListAddress + slot * Length + HeadYRotationOffset); }
@@ -184,7 +175,7 @@ namespace HockeyEditor
         /// <summary>
         /// The number of goals that the player has scored
         /// </summary>
-        public int Goals
+        public int goals
         {
             get { return MemoryWriter.ReadInt(PlayerListAddress + slot * Length + GoalsOffset); }
         }
@@ -192,7 +183,7 @@ namespace HockeyEditor
         /// <summary>
         /// The number of assists that the player has got
         /// </summary>
-        public int Assists
+        public int assists
         {
             get { return MemoryWriter.ReadInt(PlayerListAddress + slot * Length + AssistsOffset); }
         }
@@ -200,30 +191,33 @@ namespace HockeyEditor
         /// <summary>
         /// The player's position
         /// </summary>
-        public HQMVector Position
+        public HQMVector position
         {
-            get { return MemoryWriter.ReadHQMVector(LocationsAddress + ID * LocationsLength + PositionOffset); }
+            get { return MemoryWriter.ReadHQMVector(LocationsAddress + id * LocationsLength + PositionOffset); }
         }
 
         /// <summary>
         /// The Sine of the angle of the direction the player is facing
         /// </summary>
-        public float SinRotation
+        public float sinRotation
         {
-            get { return MemoryWriter.ReadFloat(LocationsAddress + ID * LocationsLength + SinRotationOffset); }
+            get { return MemoryWriter.ReadFloat(LocationsAddress + id * LocationsLength + SinRotationOffset); }
         }
 
         /// <summary>
         /// The Cosine of the angle of the direction the player is facing
         /// </summary>
-        public float CosRotation
+        public float cosRotation
         {
-            get { return MemoryWriter.ReadFloat(LocationsAddress + ID * LocationsLength + CosRotationOffset); }
+            get { return MemoryWriter.ReadFloat(LocationsAddress + id * LocationsLength + CosRotationOffset); }
         }
 
-        public HQMVector StickPosition
+        /// <summary>
+        /// The position of the player's stick
+        /// </summary>
+        public HQMVector stickPosition
         {
-            get { return MemoryWriter.ReadHQMVector(LocationsAddress + ID * LocationsLength + StickPositionOffset); }
+            get { return MemoryWriter.ReadHQMVector(LocationsAddress + id * LocationsLength + StickPositionOffset); }
         }
     }
 

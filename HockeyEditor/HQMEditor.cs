@@ -17,32 +17,6 @@ namespace HockeyEditor
             IsServer = isServer;
             MemoryWriter.Init(isServer);
         }
-
-        public static HQMVector PuckPosition
-        {
-            get { return MemoryWriter.ReadHQMVector(HQMAddresses.PUCK_POS); }
-            set { MemoryWriter.WriteHQMVector(value, HQMAddresses.PUCK_POS); }
-        }
-
-        public static HQMVector PuckVelocity
-        {
-            get { return MemoryWriter.ReadHQMVector(HQMAddresses.PUCK_VELOCITY); }
-            set { MemoryWriter.WriteHQMVector(value, HQMAddresses.PUCK_VELOCITY); }
-        }
-
-        public static HQMVector PuckRotationalVelocity
-        {
-            get { return MemoryWriter.ReadHQMVector(HQMAddresses.PUCK_ROT_VELOCITY); }
-            set { MemoryWriter.WriteHQMVector(value, HQMAddresses.PUCK_ROT_VELOCITY); }
-        }
-
-        //should probably read these in from file.
-        public static class HQMAddresses
-        {
-            public static int PUCK_POS          { get { return !IsServer ? 0x07D1C290 : 0x00000000; } }
-            public static int PUCK_VELOCITY     { get { return !IsServer ? 0x07D1C2CC : 0x00000000; } }
-            public static int PUCK_ROT_VELOCITY { get { return !IsServer ? 0x07D1C2E4 : 0x00000000; } }
-        }                                                   
     }
     
     public class HQMVector
@@ -101,6 +75,16 @@ namespace HockeyEditor
         public static bool operator ==(HQMVector left, HQMVector right)
         {
             return left.X == right.X && left.Y == right.Y && left.Z == right.Z;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public static bool operator !=(HQMVector left, HQMVector right)
