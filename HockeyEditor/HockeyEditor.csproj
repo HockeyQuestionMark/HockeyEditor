@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HockeyEditor</RootNamespace>
     <AssemblyName>HockeyEditor</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,16 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Goals.cs" />
-    <Compile Include="HQMEditor.cs" />
-    <Compile Include="LocalPlayer.cs" />
+    <Compile Include="HQMVector.cs" />
+    <Compile Include="Net.cs" />
+    <Compile Include="PlayerManager.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="MemoryWriter.cs" />
-    <Compile Include="PlayerList.cs" />
+    <Compile Include="MemoryEditor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Puck.cs" />
-    <Compile Include="Scoreboard.cs" />
-    <Compile Include="Time.cs" />
+    <Compile Include="GameInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

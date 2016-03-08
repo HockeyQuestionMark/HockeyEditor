@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace HockeyEditor
 {
-    public static class MemoryWriter
+    public static class MemoryEditor
     {
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);

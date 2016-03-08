@@ -7,37 +7,35 @@ namespace HockeyEditor
     /// </summary>
     public static class Puck
     {
-        const int LocationsAddress = 0x07D1C280;
-        
-        const int PositionOffset = 0x10;
-        const int VelocityOffset = 0x4C;
-        const int SpinOffset = 0x64;
-
+        const int PUCK_TRANSFORM_ADDRESS = 0x07D1C280;
+        const int PUCK_POSITION_OFFSET = 0x10;
+        const int PUCK_VELOCITY_OFFSET = 0x4C;
+        const int PUCK_ROTATIONAL_VELOCITY_OFFSET = 0x64;
         /// <summary>
         /// The position of the puck
         /// </summary>
-        public static HQMVector position
+        public static HQMVector Position
         {
-            get { return MemoryWriter.ReadHQMVector(LocationsAddress + PositionOffset); }
-            set { MemoryWriter.WriteHQMVector(value, LocationsAddress + PositionOffset); }
+            get { return MemoryEditor.ReadHQMVector(PUCK_TRANSFORM_ADDRESS + PUCK_POSITION_OFFSET); }
+            set { MemoryEditor.WriteHQMVector(value, PUCK_TRANSFORM_ADDRESS + PUCK_POSITION_OFFSET); }
         }
 
         /// <summary>
         /// The velocity of the puck
         /// </summary>
-        public static HQMVector velocity
+        public static HQMVector Velocity
         {
-            get { return MemoryWriter.ReadHQMVector(LocationsAddress + VelocityOffset); }
-            set { MemoryWriter.WriteHQMVector(value, LocationsAddress + VelocityOffset); }
+            get { return MemoryEditor.ReadHQMVector(PUCK_TRANSFORM_ADDRESS + PUCK_VELOCITY_OFFSET); }
+            set { MemoryEditor.WriteHQMVector(value, PUCK_TRANSFORM_ADDRESS + PUCK_VELOCITY_OFFSET); }
         }
 
         /// <summary>
         /// The spin or rotational velocity of the puck
         /// </summary>
-        public static HQMVector spin
+        public static HQMVector RotationalVelocity
         {
-            get { return MemoryWriter.ReadHQMVector(LocationsAddress + SpinOffset); }
-            set { MemoryWriter.WriteHQMVector(value, LocationsAddress + SpinOffset); }
+            get { return MemoryEditor.ReadHQMVector(PUCK_TRANSFORM_ADDRESS + PUCK_ROTATIONAL_VELOCITY_OFFSET); }
+            set { MemoryEditor.WriteHQMVector(value, PUCK_TRANSFORM_ADDRESS + PUCK_ROTATIONAL_VELOCITY_OFFSET); }
         }
     }
 }

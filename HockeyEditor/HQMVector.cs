@@ -1,24 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HockeyEditor
 {
-    public static class HQMEditor
-    {
-        private static bool IsServer = false;
-
-        /// <summary>
-        /// Must be called before any other functions in this class.
-        /// </summary>
-        /// <param name="isServer">If you are attaching to dedicatedserver.exe set this to true</param>
-        public static void Init(bool isServer = false)
-        {
-            IsServer = isServer;
-            MemoryWriter.Init(isServer);
-        }
-    }
-    
     public class HQMVector
     {
         public float X;
@@ -35,7 +22,7 @@ namespace HockeyEditor
         /// <summary>
         /// The length of the vector
         /// </summary>
-        public float magnitude
+        public float Magnitude
         {
             get { return (float)Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2) + Math.Pow(Z, 2)); }
         }
@@ -43,11 +30,11 @@ namespace HockeyEditor
         /// <summary>
         /// The same vector with a magnitude of 1
         /// </summary>
-        public HQMVector normalized
+        public HQMVector Normalized
         {
             get
             {
-                float m = magnitude;
+                float m = Magnitude;
                 return new HQMVector(X / m, Y / m, Z / m);
             }
         }

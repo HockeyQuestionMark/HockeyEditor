@@ -8,24 +8,24 @@ namespace HockeyEditorSampleProject
     {
         public Form1()
         {
-            HQMEditor.Init();
+            MemoryEditor.Init(false);
             InitializeComponent();
             timer1.Start();
         }
 
         private void ResetPuck_Click(object sender, EventArgs e)
         {
-            Puck.position = new HQMVector( 15f, 0.5f, 30.5f );
+            Puck.Position = new HQMVector( 15f, 0.5f, 30.5f );
         }
 
         private void ResetVel_Click(object sender, EventArgs e)
         {
-            Puck.velocity = new HQMVector ( 0f, 0f, 0f );
+            Puck.Velocity = new HQMVector ( 0f, 0f, 0f );
         }
 
         private void ResetSpin_Click(object sender, EventArgs e)
         {
-            Puck.spin = new HQMVector ( 0f, 0f, 0f );
+            Puck.RotationalVelocity = new HQMVector ( 0f, 0f, 0f );
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -35,24 +35,24 @@ namespace HockeyEditorSampleProject
 
         private void PuckPos_Click(object sender, EventArgs e)
         {
-            Puck.velocity = (LocalPlayer.stickPosition - Puck.position).normalized * 0.1f;
+            Puck.Velocity = (PlayerManager.LocalPlayer.StickPosition - Puck.Position).Normalized * 0.1f;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            HQMVector puckPos = Puck.position;
+            HQMVector puckPos = Puck.Position;
             PuckPos.Text = "Puck Pos: (" + puckPos + ")";
 
-            HQMVector puckRot = Puck.spin;
+            HQMVector puckRot = Puck.RotationalVelocity;
             PuckSpin.Text = "Puck Spin: (" + puckRot + ")";
 
-            HQMVector puckVel = Puck.velocity;
+            HQMVector puckVel = Puck.Velocity;
             PuckVel.Text = "Puck Velocity: (" + puckVel + ")";
 
-            HQMVector playerPos = LocalPlayer.position;
+            HQMVector playerPos = PlayerManager.LocalPlayer.Position;
             PlayerPos.Text = "Player Pos: (" + playerPos + ")";
 
-            HQMVector playerStickPos = LocalPlayer.stickPosition;
+            HQMVector playerStickPos = PlayerManager.LocalPlayer.StickPosition;
             PlayerStick.Text = "Player Stick Pos: (" + playerStickPos + ")";
         }
     }
