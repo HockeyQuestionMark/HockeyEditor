@@ -41,7 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HQMEditor.cs" />
-    <Compile Include="HQMPlayer.cs" />
+    <Compile Include="LocalPlayer.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="MemoryWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
