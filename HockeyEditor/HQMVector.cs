@@ -12,6 +12,9 @@ namespace HockeyEditor
         public float Y;
         public float Z;
 
+        /// <summary>
+        /// Creates a new vector with given x, y, z components
+        /// </summary>
         public HQMVector(float x, float y, float z)
         {
             X = x;

@@ -46,7 +46,7 @@ namespace HockeyEditor
 
         private int m_BaseAddress;
 
-        internal Net(int baseAddress)
+        private Net(int baseAddress)
         {
             m_BaseAddress = baseAddress;
         }
@@ -97,6 +97,35 @@ namespace HockeyEditor
         {
             get { return MemoryEditor.ReadHQMVector(m_BaseAddress + RIGHT_BACK_TOP_OFFSET); }
             set { MemoryEditor.WriteHQMVector(value, m_BaseAddress + RIGHT_BACK_TOP_OFFSET); }
+        }
+
+        /// <summary>
+        /// Reset the net to its default position
+        /// </summary>
+        public void Reset()
+        {
+            if (m_BaseAddress == RED_NET_ADDRESS)
+            {
+                RightFrontBottom = RedDefaultPositions.RIGHT_FRONT_BOTTOM;
+                LeftFrontBottom = RedDefaultPositions.LEFT_FRONT_BOTTOM;
+                LeftBackBottom = RedDefaultPositions.LEFT_BACK_BOTTOM;
+                RightBackBottom = RedDefaultPositions.RIGHT_BACK_BOTTOM;
+                RightFrontTop = RedDefaultPositions.RIGHT_FRONT_TOP;
+                LeftFrontTop = RedDefaultPositions.LEFT_FRONT_TOP;
+                LeftBackTop = RedDefaultPositions.LEFT_BACK_TOP;
+                RightBackTop = RedDefaultPositions.RIGHT_BACK_TOP;
+            }
+            else if (m_BaseAddress == BLUE_NET_ADDRESS)
+            {
+                RightFrontBottom = BlueDefaultPositions.RIGHT_FRONT_BOTTOM;
+                LeftFrontBottom = BlueDefaultPositions.LEFT_FRONT_BOTTOM;
+                LeftBackBottom = BlueDefaultPositions.LEFT_BACK_BOTTOM;
+                RightBackBottom = BlueDefaultPositions.RIGHT_BACK_BOTTOM;
+                RightFrontTop = BlueDefaultPositions.RIGHT_FRONT_TOP;
+                LeftFrontTop = BlueDefaultPositions.LEFT_FRONT_TOP;
+                LeftBackTop = BlueDefaultPositions.LEFT_BACK_TOP;
+                RightBackTop = BlueDefaultPositions.RIGHT_BACK_TOP;
+            }
         }
 
         /// <summary>

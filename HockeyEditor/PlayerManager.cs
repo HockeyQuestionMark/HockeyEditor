@@ -9,7 +9,7 @@ namespace HockeyEditor
         const int NUM_PLAYERS = 30;
 
         /// <summary>
-        /// An array of Player classes for every player in the server
+        /// An array of Player objects for every player in the server
         /// </summary>
         public static Player[] Players
         {

@@ -82,7 +82,7 @@ namespace HockeyEditor
         }
 
         /// <summary>
-        /// Time amount of time in hundredths of a second that before the player can change team again
+        /// The amount of time in hundredths of a second that before the player can change team again
         /// </summary>
         public int LockoutTime
         {

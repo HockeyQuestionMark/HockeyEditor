@@ -15,7 +15,7 @@ namespace HockeyEditor
         static extern bool WriteProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesWritten);
 
         [DllImport("kernel32.dll")]
-        public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+        static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
         private const int PROCESS_ALL_ACCESS = 0x1F0FFF;
         private static Process hockeyProcess = null;
@@ -25,8 +25,26 @@ namespace HockeyEditor
         /// <summary>
         /// Attaches to hockey.exe. Must be called before anything else. Make sure hockey is running
         /// </summary>
-        /// <param name="launchHockey">Whether to launch the hockey process or not.</param>
+        /// <param name="isServer">Do you wish to attach to hockeydedicated.exe?</param>
         public static void Init(bool isServer)
+        {
+            try
+            {
+                hockeyProcess = Process.GetProcessesByName("hockey")[0];
+            }
+            catch (System.IndexOutOfRangeException e)  // CS0168
+            {
+                System.Console.WriteLine(e.Message);
+
+                throw new System.ArgumentOutOfRangeException("no hockey.exe found", e);
+            }
+            hockeyProcessHandle = OpenProcess(PROCESS_ALL_ACCESS, false, hockeyProcess.Id);
+        }
+
+        // <summary>
+        /// Attaches to hockey.exe. Must be called before anything else. Make sure hockey is running
+        /// </summary>
+        public static void Init()
         {
             try
             {
