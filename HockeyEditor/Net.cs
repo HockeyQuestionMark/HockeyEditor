@@ -129,7 +129,7 @@ namespace HockeyEditor
         }
 
         /// <summary>
-        /// Translates the whole goals by the given vector
+        /// Translates the whole net by the given vector
         /// </summary>
         /// <param name="translation">The vector to translate</param>
         public void Translate(HQMVector translation)

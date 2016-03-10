@@ -15,17 +15,17 @@ namespace HockeyEditorSampleProject
 
         private void ResetPuck_Click(object sender, EventArgs e)
         {
-            Puck.Position = new HQMVector( 15f, 0.5f, 30.5f );
+            Puck.Position = HQMVector.Centre;
         }
 
         private void ResetVel_Click(object sender, EventArgs e)
         {
-            Puck.Velocity = new HQMVector ( 0f, 0f, 0f );
+            Puck.Velocity = HQMVector.Zero;
         }
 
         private void ResetSpin_Click(object sender, EventArgs e)
         {
-            Puck.RotationalVelocity = new HQMVector ( 0f, 0f, 0f );
+            Puck.RotationalVelocity = HQMVector.Zero;
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)

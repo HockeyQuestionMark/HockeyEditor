@@ -23,6 +23,39 @@ namespace HockeyEditor
         }
 
         /// <summary>
+        /// A HQMVector with all components set to 0
+        /// </summary>
+        public static HQMVector Zero
+        {
+            get { return new HQMVector(0, 0, 0); }
+        }
+
+        /// <summary>
+        /// A HQMVector set to the centre of the ice
+        /// </summary>
+        public static HQMVector Centre
+        {
+            get { return new HQMVector(15, 0, 30.5f); }
+        }
+
+        /// <summary>
+        /// A HQMVector set to the centre of the goal line in the red net (default position)
+        /// </summary>
+        public static HQMVector RedNet
+        {
+            get { return new HQMVector(15, 0, 57); }
+        }
+
+        /// <summary>
+        /// A HQMVector set to the centre of the goal line in the blue net (default position)
+        /// </summary>
+        public static HQMVector BlueNet
+        {
+            get { return new HQMVector(15, 0, 4); }
+        }
+
+
+        /// <summary>
         /// The length of the vector
         /// </summary>
         public float Magnitude
