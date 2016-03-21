@@ -18,6 +18,9 @@ namespace HockeyEditor
         const int RED_SCORE_OFFSET = 0x0;
         const int BLUE_SCORE_OFFSET = 0x4;
 
+        const int CHAT_OPEN = 0x07CAAFE0;
+        const int CHATMESSAGE = 0x07126C00;
+
         /// <summary>
         /// The red team's score
         /// </summary>
@@ -70,6 +73,16 @@ namespace HockeyEditor
         {
             get { return MemoryEditor.ReadInt(STOP_TIME_ADDRESS); }
             set { MemoryEditor.WriteInt(value, STOP_TIME_ADDRESS); }
+        }
+
+        /// <summary>
+        /// Send a message to chat from local player
+        /// </summary>
+        /// <param name="message">the message to send, only the first 63 characters will be shown</param>
+        public static void SendChatMessage(string message)
+        {
+            MemoryEditor.WriteInt(CHAT_OPEN, 0);
+            MemoryEditor.WriteString(CHATMESSAGE, message );
         }
     }
 }
