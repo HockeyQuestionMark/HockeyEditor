@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HockeyEditor
+﻿namespace HockeyEditor
 {
     /// <summary>
     /// Contains information about the Puck

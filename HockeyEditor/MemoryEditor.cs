@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
@@ -123,7 +122,7 @@ namespace HockeyEditor
             ReadProcessMemory((int)hockeyProcessHandle, address, buffer, buffer.Length, ref bytesRead);
 
             // Read up until a \0 is encounted
-            return Encoding.ASCII.GetString(buffer).Split('\0')[0];
+              return Encoding.ASCII.GetString(buffer).Split('\0')[0];
         }
 
         public static void WriteString(int address, string str)

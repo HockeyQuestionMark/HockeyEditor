@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HockeyEditor
+﻿namespace HockeyEditor
 {
     /// <summary>
     /// Contains information about the scores of the 2 teams
@@ -16,10 +14,7 @@ namespace HockeyEditor
 
         const int SCOREBOARD_ADDRESS = 0x07D33D98;
         const int RED_SCORE_OFFSET = 0x0;
-        const int BLUE_SCORE_OFFSET = 0x4;
-
-        const int CHAT_OPEN = 0x07CAAFE0;
-        const int CHATMESSAGE = 0x07126C00;
+        const int BLUE_SCORE_OFFSET = 0x4;      
 
         /// <summary>
         /// The red team's score
@@ -69,20 +64,12 @@ namespace HockeyEditor
         /// <summary>
         /// The amount of time in hundredths of a second before the next faceoff starts (after a goal)
         /// </summary>
-        public static int StopTime
+        public static int AfterGoalFaceoffTime
         {
             get { return MemoryEditor.ReadInt(STOP_TIME_ADDRESS); }
             set { MemoryEditor.WriteInt(value, STOP_TIME_ADDRESS); }
         }
 
-        /// <summary>
-        /// Send a message to chat from local player
-        /// </summary>
-        /// <param name="message">the message to send, only the first 63 characters will be shown</param>
-        public static void SendChatMessage(string message)
-        {
-            MemoryEditor.WriteInt(CHAT_OPEN, 0);
-            MemoryEditor.WriteString(CHATMESSAGE, message );
-        }
+        
     }
 }
