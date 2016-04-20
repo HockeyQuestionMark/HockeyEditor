@@ -14,7 +14,10 @@
 
         const int SCOREBOARD_ADDRESS = 0x07D33D98;
         const int RED_SCORE_OFFSET = 0x0;
-        const int BLUE_SCORE_OFFSET = 0x4;      
+        const int BLUE_SCORE_OFFSET = 0x4;
+
+        const int GAME_OVER = 0x07D349AC;
+
 
         /// <summary>
         /// The red team's score
@@ -69,6 +72,15 @@
             get { return MemoryEditor.ReadInt(STOP_TIME_ADDRESS); }
             set { MemoryEditor.WriteInt(value, STOP_TIME_ADDRESS); }
         }
+
+        /// <summary>
+        /// If the game is over
+        /// </summary>
+        public static bool IsGameOver
+        {
+            get { return MemoryEditor.ReadInt(GAME_OVER) == 1; }
+        }
+
 
         
     }
